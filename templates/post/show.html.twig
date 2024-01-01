@@ -1,0 +1,55 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Post{% endblock %}
+
+{% block body %}
+    <div class="container mt-4">
+        <h1>Post Details</h1>
+
+        <table class="table table-bordered">
+            <tbody>
+                <tr>
+                    <th scope="row">Id</th>
+                    <td>{{ post.id }}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Title</th>
+                    <td>{{ post.title }}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Image</th>
+                  <td>
+                    <div class="mb-3">
+                        <img src="{{ asset('/uploads/' ~ post.image.imageName) }}" alt="Image" class="img-fluid">
+                    </div>
+                  </td>
+                </tr>
+
+            </tbody>
+        </table>
+       
+    <div class="my-1">
+
+        <div class="my-1">
+            {% if user %}
+                <a href="{{ path('app_post_index') }}" class="btn btn-secondary">
+                    <i class="bi bi-arrow-left"></i> Retour
+                </a>
+            {% else %}
+                <a href="{{ path('main') }}" class="btn btn-secondary">
+                    <i class="bi bi-arrow-left"></i> Retour
+                </a>
+            {% endif %}
+        </div>
+        
+        {% if user %}
+            <div class="my-1">
+                <a href="{{ path('app_post_edit', {'id': post.id}) }}" class="btn btn-primary">
+                    <i class="bi bi-pencil"></i> Edit
+                </a>
+            </div>
+        
+            {{ include('post/_delete_form.html.twig') }}
+        {% endif %}
+        
+{% endblock %}

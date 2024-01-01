@@ -1,0 +1,30 @@
+{# {{ form_start(form) }}
+    {{ form_widget(form) }}
+
+    {% if app.request.attributes.get('_route')== 'app_post_edit' %}
+    <h2>Images</h2>
+    <div>
+        <img src="{{asset('/uploads/' ~ post.image.imageName)}}" alt="image" width="200">
+    </div>
+    {% endif %}
+    <button class="btn btn-success my-2">{{ button_label|default('Save') }}</button>
+{{ form_end(form) }}
+ #}
+ {{ form_start(form) }}
+ <div class="mb-3">
+     {{ form_row(form.title, {'attr': {'class': 'form-control'}}) }}
+ </div>
+
+ {% if app.request.attributes.get('_route') == 'app_post_edit' %}
+     <h2>Image</h2>
+     <div class="mb-3">
+         <img src="{{ asset('/uploads/' ~ post.image.imageName) }}" alt="Image" class="img-fluid">
+     </div>
+ {% endif %}
+
+ <div class="mb-3">
+     {{ form_row(form.image, {'attr': {'class': 'form-control'}}) }}
+ </div>
+
+ <button class="btn btn-success">{{ button_label|default('Save') }}</button>
+{{ form_end(form) }}
